@@ -9,7 +9,7 @@ docker run \
   --interactive \
   --rm \
   --publish=7474:7474 \
-  --volume= $HOME/neo4j/data:/data \
+  --volume=$HOME/neo4j/data:/data \
   herrhelms/neo4j:latest
 ```
 
@@ -18,7 +18,7 @@ docker run \
 docker run \
   --detach \
   --publish=7474:7474 \
-  --volume= $HOME/neo4j/data:/data \
+  --volume=$HOME/neo4j/data:/data \
   herrhelms/neo4j:latest
 ```
 
