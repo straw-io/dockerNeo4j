@@ -19,6 +19,7 @@ RUN curl --fail --silent --show-error --location --output neo4j.tar.gz $NEO4J_UR
 WORKDIR /var/lib/neo4j
 
 ADD docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
+RUN chmod +x /usr/bin/docker-entrypoint.sh
 
 RUN mv data /data \
     && ln --symbolic /data
