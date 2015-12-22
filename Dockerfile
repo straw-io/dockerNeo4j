@@ -11,6 +11,8 @@ ENV NEO4J_DOWNLOAD_ROOT http://dist.neo4j.org
 ENV NEO4J_TARBALL neo4j-$NEO4J_EDITION-$NEO4J_VERSION-unix.tar.gz
 ENV NEO4J_URI $NEO4J_DOWNLOAD_ROOT/$NEO4J_TARBALL
 
+
+
 RUN curl --fail --silent --show-error --location --output neo4j.tar.gz $NEO4J_URI \
     && echo "$NEO4J_DOWNLOAD_SHA256 neo4j.tar.gz" | sha256sum --check --quiet - \
     && tar --extract --file neo4j.tar.gz --directory /var/lib \
@@ -18,6 +20,8 @@ RUN curl --fail --silent --show-error --location --output neo4j.tar.gz $NEO4J_UR
     && rm neo4j.tar.gz
 
 WORKDIR /var/lib/neo4j
+
+ADD docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 
 RUN mv data /data \
     && ln --symbolic /data
@@ -28,5 +32,5 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 EXPOSE 7474 7473
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 CMD ["neo4j"]
